@@ -1,6 +1,6 @@
 package com.example.ITSS.models;
 
-import com.example.ITSS.enums.RiskLevel;
+import com.example.ITSS.models.enums.RiskLevel;
 import jakarta.persistence.*;
 import lombok.*;
 

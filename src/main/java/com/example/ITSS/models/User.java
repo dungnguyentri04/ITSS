@@ -1,11 +1,10 @@
 package com.example.ITSS.models;
 
-import com.example.ITSS.enums.UserRole;
+import com.example.ITSS.models.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

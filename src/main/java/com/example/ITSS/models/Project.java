@@ -1,6 +1,6 @@
 package com.example.ITSS.models;
 
-import com.example.ITSS.enums.StatusProject;
+import com.example.ITSS.models.enums.StatusProject;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +30,9 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private StatusProject status;  // Enum for project status (e.g., IN_PROGRESS, COMPLETED)
 
-    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name = "user_created_id")
+    private User userCreated;
 
     private String createdAt;
 
