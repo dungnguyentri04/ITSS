@@ -2,21 +2,28 @@ package com.example.ITSS.service.Impl;
 
 import com.example.ITSS.dto.requestDto.UserRequestDto;
 import com.example.ITSS.dto.responseDto.UserResponseDto;
+import com.example.ITSS.models.ProjectMember;
 import com.example.ITSS.models.enums.UserRole;
 import com.example.ITSS.exception.NotFoundException;
 import com.example.ITSS.models.User;
+import com.example.ITSS.repositories.ProjectMemberRepository;
 import com.example.ITSS.repositories.UserRepository;
 import com.example.ITSS.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProjectMemberRepository projectMemberRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -53,10 +60,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto addUser(UserRequestDto userRequestDto) {
+        User existingUser = userRepository.findByUserName(userRequestDto.getUserName());
+        if (existingUser != null) {
+            throw new IllegalArgumentException("User already exists");
+        }
         //check user ton tai
         User user = modelMapper.map(userRequestDto, User.class);
         UserRole role = UserRole.valueOf(userRequestDto.getRole());
+        user.setCreated_at(LocalDate.now());
         User saveUser = userRepository.save(user);
-        return modelMapper.map(saveUser, UserResponseDto.class);
+        UserResponseDto userResponseDto = modelMapper.map(saveUser, UserResponseDto.class);
+        userResponseDto.setRole(saveUser.getRole().name());
+        userResponseDto.setCreated_at(saveUser.getCreated_at().toString());
+        return userResponseDto;
     }
+
 }

@@ -4,6 +4,8 @@ import com.example.ITSS.models.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -13,13 +15,17 @@ import lombok.*;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
 
-    private Long assigneeId;
+    @ManyToOne
+    @JoinColumn(name = "assignee_id")
+    private User assignee;
+
+    private String createdBy;
 
     private String title;
 
@@ -28,5 +34,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskStatus status;  // Enum for task status (e.g., PENDING, IN_PROGRESS, COMPLETED)
 
-    private String createdAt;
+    private LocalDate deadline;
+
+    private LocalDate updatedAt;
+
+    private LocalDate createdAt;
 }

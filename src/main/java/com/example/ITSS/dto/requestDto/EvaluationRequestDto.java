@@ -7,18 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskRequestDto {
-    private String title;
+public class EvaluationRequestDto {
+    private String comment;
 
-    private String description;
+    private float score;
 
-    private String status;
+    private Long evaluatorId;
 
-    private String assignee;
+    private Long evaluatedId;
 
     private Long projectId;
-
-    private String createdBy;
-
-    private String deadline;
 }

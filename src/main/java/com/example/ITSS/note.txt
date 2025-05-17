@@ -1,0 +1,11 @@
+1.xu ly dau vao localDate
+2.Them thuoc tinh link github cho thanh vien
+3.Tao ma project de tham gia
+
+
+
+
+
+
+** xu ly dieu kien dau vao
+** logic kiểm tra quyền

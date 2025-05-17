@@ -25,7 +25,7 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/users")
+    @PostMapping("/users/addUser")
     public ResponseEntity<ApiResponse<UserResponseDto>> addUser(@RequestBody UserRequestDto userRequestDto){
         UserResponseDto userDto = userService.addUser(userRequestDto);
         ApiResponse<UserResponseDto> response = new ApiResponse<>();
@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/users/deleteUser/{userId}")
     public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable Long userId){
         String message = userService.deleteUserById(userId);
         ApiResponse<String> response = new ApiResponse<>();
@@ -46,12 +46,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/users/updateUser/{userId}")
     public String updateUser(){
         return null;
     }
 
-    @GetMapping("/users/allUsers")
+    @GetMapping("/users/getAllUsers")
     public ResponseEntity<?> getAllUsers(){
         List<UserResponseDto> userDtoList = userService.getAllUser();
         ApiResponse<List<UserResponseDto>> apiResponse = new ApiResponse<>();
@@ -64,7 +64,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/users/getUser/{userId}")
     public ResponseEntity<?> getUser(@PathVariable Long userId){
         UserResponseDto userDto = userService.findUserById(userId);
         ApiResponse<UserResponseDto> apiResponse = new ApiResponse<>();
@@ -80,5 +80,10 @@ public class UserController {
         return null;
     }
 
+    @GetMapping("/users/getUsersProject")
+    public ResponseEntity<?> getUserProject(@RequestParam("projectId") Long projectId){
+
+        return null;
+    }
 
 }

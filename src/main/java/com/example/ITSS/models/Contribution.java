@@ -1,12 +1,9 @@
 package com.example.ITSS.models;
 
-import com.example.ITSS.models.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.Date;
-
 
 @Getter
 @Setter
@@ -14,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ProjectMember {
+public class Contribution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,12 +24,14 @@ public class ProjectMember {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String nameGithub;
+    private float contributionPercentage;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private int commitCount;
 
-    private LocalDate createdAt;
+    private int linesOfCode;
 
-    private LocalDate updatedAt;
+    private Date createdAt;
+
+    private Date updatedAt;
+
 }

@@ -1,4 +1,4 @@
 package com.example.ITSS.service;
 
-public interface PredictionService {
+public interface EvaluationService {
 }

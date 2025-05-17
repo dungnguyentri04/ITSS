@@ -13,4 +13,6 @@ public interface UserService {
     public String deleteUserById(Long id);
 
     public UserResponseDto addUser(UserRequestDto userDto);
+
+//    public List<UserResponseDto> getUserProject(Long projectId);
 }

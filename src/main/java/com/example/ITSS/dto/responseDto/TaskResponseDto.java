@@ -9,24 +9,24 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectResponseDto {
+public class TaskResponseDto {
     private Long id;
+
+    private String assignee;
+
+    private String createdBy;
+
+    private Long projectId;
 
     private String title;
 
     private String description;
 
-    private LocalDate startDate;
+    private String status;
 
-    private LocalDate endDate;
-
-    private String leaderName;
-
-    private String userCreatedName;
-
-    private String githubLink;
+    private LocalDate deadline;
 
     private LocalDate createdAt;
 
-    //status
+    private LocalDate updatedAt;
 }
