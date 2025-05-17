@@ -9,3 +9,4 @@
 
 ** xu ly dieu kien dau vao
 ** logic kiểm tra quyền
+** xu ly khong dung link github
