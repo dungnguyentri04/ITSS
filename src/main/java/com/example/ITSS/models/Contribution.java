@@ -18,7 +18,7 @@ public class Contribution {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project project;
+    private Class project;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

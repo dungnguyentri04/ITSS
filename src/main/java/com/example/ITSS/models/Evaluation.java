@@ -19,7 +19,7 @@ public class Evaluation {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project project;
+    private Class project;
 
     @ManyToOne
     @JoinColumn(name = "evaluator_id")

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Getter
@@ -14,23 +13,23 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ProjectMember {
+public class ProjectClassMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinColumn(name = "class_id")
+    private Class aClass;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String nameGithub;
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    private Long projectId;
 
     private LocalDate createdAt;
 

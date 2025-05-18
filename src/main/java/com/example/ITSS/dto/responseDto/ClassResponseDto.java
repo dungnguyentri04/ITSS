@@ -9,18 +9,15 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectMemberResponseDto {
+public class ClassResponseDto {
     private Long id;
 
-    private String nameGithub;
+    private String subject;
 
-    private Long userId;
+    private String description;
 
-    private Long projectId;
-
-    private String role;
+    private String userCreatedName;
 
     private LocalDate createdAt;
 
-    private String name;
 }

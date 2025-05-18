@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -41,7 +40,7 @@ public class User {
     private List<Evaluation> evaluatedList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<ProjectMember> projectMemberList = new ArrayList<>();
+    private List<ProjectClassMember> projectClassMemberList = new ArrayList<>();
 
     private String email;
 

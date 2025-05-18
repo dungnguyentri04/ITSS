@@ -1,11 +1,10 @@
 package com.example.ITSS.service.Impl;
 
 import com.example.ITSS.exception.NotFoundException;
-import com.example.ITSS.models.Project;
-import com.example.ITSS.repositories.ProjectRepository;
+import com.example.ITSS.models.Class;
+import com.example.ITSS.repositories.ClassRepository;
 import com.example.ITSS.service.GithubService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,15 +21,15 @@ import java.util.Map;
 @Service
 public class GithubServiceImpl implements GithubService {
     @Autowired
-    private ProjectRepository projectRepository;
+    private ClassRepository classRepository;
 
     @Override
     public List<Map<String, Object>> getGithubData(Long projectId) {
-        Project project = projectRepository.findById(projectId).orElseThrow(
+        Class aClass = classRepository.findById(projectId).orElseThrow(
                 () -> new NotFoundException("Project not found")
         );
-        String githubLink = project.getGithubLink();
-        String token = project.getToken();
+        String githubLink = aClass.getGithubLink();
+        String token = aClass.getToken();
         if (githubLink == null || token == null) {
             throw new NotFoundException("Can't get github data");
         }

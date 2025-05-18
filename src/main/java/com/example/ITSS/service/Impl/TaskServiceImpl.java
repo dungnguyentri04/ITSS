@@ -2,17 +2,17 @@ package com.example.ITSS.service.Impl;
 
 import com.example.ITSS.dto.requestDto.TaskRequestDto;
 import com.example.ITSS.dto.responseDto.TaskResponseDto;
-import com.example.ITSS.dto.responseDto.UserResponseDto;
 import com.example.ITSS.exception.NotFoundException;
+import com.example.ITSS.models.Class;
 import com.example.ITSS.models.Project;
 import com.example.ITSS.models.Task;
 import com.example.ITSS.models.User;
+import com.example.ITSS.models.enums.TaskStatus;
+import com.example.ITSS.repositories.ClassRepository;
 import com.example.ITSS.repositories.ProjectRepository;
 import com.example.ITSS.repositories.TaskRepository;
 import com.example.ITSS.repositories.UserRepository;
-import com.example.ITSS.service.ProjectService;
 import com.example.ITSS.service.TaskService;
-import com.example.ITSS.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,10 +29,13 @@ public class TaskServiceImpl implements TaskService {
     private UserRepository userRepository;
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private ClassRepository classRepository;
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public TaskResponseDto addTask(TaskRequestDto taskRequestDto) {
@@ -48,13 +51,14 @@ public class TaskServiceImpl implements TaskService {
         task.setAssignee(assignee);
         task.setProject(project);
         task.setCreatedAt(LocalDate.now());
+        task.setStatus(TaskStatus.IN_PROGRESS);
         Task saveTask = taskRepository.save(task);
         // save project
-        project.getTasks().add(saveTask);
-        projectRepository.save(project);
-        // save user
-        assignee.getTaskList().add(saveTask);
-        userRepository.save(assignee);
+//        project.getTasks().add(saveTask);
+//        projectRepository.save(project);
+//        // save user
+//        assignee.getTaskList().add(saveTask);
+//        userRepository.save(assignee);
         // return
         TaskResponseDto taskResponseDto = modelMapper.map(saveTask, TaskResponseDto.class);
         taskResponseDto.setAssignee(taskRequestDto.getAssignee());

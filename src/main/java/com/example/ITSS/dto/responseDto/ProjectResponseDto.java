@@ -1,32 +1,4 @@
 package com.example.ITSS.dto.responseDto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProjectResponseDto {
-    private Long id;
-
-    private String title;
-
-    private String description;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    private String leaderName;
-
-    private String userCreatedName;
-
-    private String githubLink;
-
-    private LocalDate createdAt;
-
-    //status
 }

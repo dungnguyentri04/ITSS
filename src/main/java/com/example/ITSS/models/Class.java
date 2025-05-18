@@ -1,5 +1,6 @@
 package com.example.ITSS.models;
 
+import com.example.ITSS.models.enums.StatusProject;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,31 +14,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Project {
+public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class aClass;
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
-
-    private String title;
+    private String subject;
 
     private String description;
 
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    private String leaderName;
-
     private String userCreatedName;
 
-    private String githubLink;
-
     private LocalDate createdAt;
+
+    @OneToMany(mappedBy = "class", cascade = CascadeType.ALL)
+    private List<ProjectClassMember> projectClassMembers;
+
+    @OneToMany(mappedBy = "class", cascade = CascadeType.ALL)
+    private List<Project> projects = new ArrayList<>();
 }
