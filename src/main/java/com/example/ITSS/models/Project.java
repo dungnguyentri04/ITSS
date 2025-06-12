@@ -20,7 +20,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Class aClass;
+    private Class classroom;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
@@ -38,6 +38,8 @@ public class Project {
     private String userCreatedName;
 
     private String githubLink;
+
+    private String token;
 
     private LocalDate createdAt;
 }

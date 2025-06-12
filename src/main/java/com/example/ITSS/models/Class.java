@@ -27,9 +27,12 @@ public class Class {
 
     private LocalDate createdAt;
 
-    @OneToMany(mappedBy = "class", cascade = CascadeType.ALL)
+    @Column(unique = true)
+    private String codeClass;
+
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<ProjectClassMember> projectClassMembers;
 
-    @OneToMany(mappedBy = "class", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Project> projects = new ArrayList<>();
 }

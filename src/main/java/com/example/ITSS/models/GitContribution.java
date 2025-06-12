@@ -1,11 +1,9 @@
 package com.example.ITSS.models;
 
-import com.example.ITSS.models.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-
 
 @Getter
 @Setter
@@ -13,29 +11,35 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class ProjectClassMember {
+public class GitContribution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class classroom;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
-
     private Long projectId;
+
+    @Column(unique = true)
+    private String commitHash;
+
+    private Long memberId;
+
+    private Long userId;
 
     private String nameGithub;
 
     private String username;
 
+    private LocalDate commitDate;
+
+    private Long linesAdded;
+
+    private Long linesRemoved;
+
     private LocalDate createdAt;
 
     private LocalDate updatedAt;
+
+    private String message;
+
+    private String githubLink;
 }

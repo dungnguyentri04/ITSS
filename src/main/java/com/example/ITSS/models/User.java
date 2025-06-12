@@ -33,8 +33,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Contribution> contributionList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "evaluator", cascade = CascadeType.ALL)
-    private List<Evaluation> evaluatorList = new ArrayList<>();
+    @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL)
+    private List<Evaluation> reporterList = new ArrayList<>();
 
     @OneToMany(mappedBy = "evaluated", cascade = CascadeType.ALL)
     private List<Evaluation> evaluatedList = new ArrayList<>();
@@ -42,7 +42,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ProjectClassMember> projectClassMemberList = new ArrayList<>();
 
+    @Column(unique = true)
     private String email;
+
+    private String phone;
 
 //    private String phoneNumber;
 

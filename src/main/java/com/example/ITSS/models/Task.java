@@ -1,5 +1,6 @@
 package com.example.ITSS.models;
 
+import com.example.ITSS.models.enums.TaskPriority;
 import com.example.ITSS.models.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,9 +35,13 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskStatus status;  // Enum for task status (e.g., PENDING, IN_PROGRESS, COMPLETED)
 
+    private TaskPriority priority;
+
     private LocalDate deadline;
 
     private LocalDate updatedAt;
 
     private LocalDate createdAt;
+
+    private LocalDate completedAt;
 }

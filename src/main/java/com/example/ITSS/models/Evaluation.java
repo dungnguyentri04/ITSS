@@ -3,6 +3,7 @@ package com.example.ITSS.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -19,11 +20,11 @@ public class Evaluation {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Class project;
+    private Project project;
 
     @ManyToOne
-    @JoinColumn(name = "evaluator_id")
-    private User evaluator;
+    @JoinColumn(name = "reporter_id")
+    private User reporter;
 
     @ManyToOne
     @JoinColumn(name = "evaluated_id")
@@ -31,9 +32,25 @@ public class Evaluation {
 
     private String comment;
 
-    private float score;
+    private float avarageScore;
 
-    private Date createdAt;
+    private LocalDate createdAt;
 
-    private Date updatedAt;
+    private LocalDate updatedAt;
+
+    private int qualityScore;
+
+    private int spiritScore;
+
+    private int communicationScore;
+
+    private int teamworkScore;
+
+    private String strongPoint;
+
+    private String weakPoint;
+
+    private String title;
+
+    private String reportedName;
 }
