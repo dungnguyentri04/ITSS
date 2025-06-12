@@ -90,4 +90,15 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/task/getTask")
+    public ResponseEntity<?> getTask(@RequestParam("taskId") Long taskId) {
+        TaskResponseDto taskResponseDto = taskService.findTaskById(taskId);
+        ApiResponse<TaskResponseDto> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setMessage("get task successfully");
+        response.setData(taskResponseDto);
+        response.setMetadata(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

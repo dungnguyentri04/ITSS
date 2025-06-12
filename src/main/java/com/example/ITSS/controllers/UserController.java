@@ -99,4 +99,40 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
+    @GetMapping("/users/getUsersByProjectId")
+    public ResponseEntity<?> getUserByProjectId(@RequestParam("projectId") Long projectId){
+        List<UserResponseDto> userDtoList = null;
+        ApiResponse<List<UserResponseDto>> apiResponse = new ApiResponse<>();
+        Map<String, Object> metadata = new HashMap<>();
+        apiResponse.setStatus("success");
+        apiResponse.setMessage("All users");
+        apiResponse.setMetadata(metadata);
+        apiResponse.setData(userDtoList);
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @GetMapping("/users/getUsersByUserId")
+    public ResponseEntity<?> getUserByUserId(@RequestParam("userId") Long userId){
+        List<UserResponseDto> userDtoList =null;
+        ApiResponse<List<UserResponseDto>> apiResponse = new ApiResponse<>();
+        Map<String, Object> metadata = new HashMap<>();
+        apiResponse.setStatus("success");
+        apiResponse.setMessage("All users");
+        apiResponse.setMetadata(metadata);
+        apiResponse.setData(userDtoList);
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
+    @GetMapping("/users/getUsersByUserIdAndProjectId")
+    public ResponseEntity<?> getUserByUserIdAndProjectId(@RequestParam("userId") Long userId, @RequestParam("projectId") Long projectId){
+        List<UserResponseDto> userDtoList = null;
+        ApiResponse<List<UserResponseDto>> apiResponse = new ApiResponse<>();
+        Map<String, Object> metadata = new HashMap<>();
+        apiResponse.setStatus("success");
+        apiResponse.setMessage("All users");
+        apiResponse.setMetadata(metadata);
+        apiResponse.setData(userDtoList);
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
 }
