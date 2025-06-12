@@ -86,4 +86,17 @@ public class UserController {
         return null;
     }
 
+    @GetMapping("/users/getUsersByClassId")
+    public ResponseEntity<?> getUserByClassId(@RequestParam("classId") Long classId){
+        List<UserResponseDto> userDtoList = userService.getUsersByClassId(classId);
+        ApiResponse<List<UserResponseDto>> apiResponse = new ApiResponse<>();
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("total", userDtoList.size());
+        apiResponse.setStatus("success");
+        apiResponse.setMessage("All users");
+        apiResponse.setMetadata(metadata);
+        apiResponse.setData(userDtoList);
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+    }
+
 }
