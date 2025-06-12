@@ -1,6 +1,7 @@
 package com.example.ITSS.config;
 
 import com.example.ITSS.models.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +12,12 @@ import java.util.List;
 
 public class OurUserInfoDetail implements UserDetails {
     private User user;
+    @Getter
+    private Long id;
     private List<GrantedAuthority> roles;
     public OurUserInfoDetail(User user){
         this.user = user;
+        this.id = user.getId();
         this.roles = List.of(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
@@ -51,4 +55,5 @@ public class OurUserInfoDetail implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
 }
