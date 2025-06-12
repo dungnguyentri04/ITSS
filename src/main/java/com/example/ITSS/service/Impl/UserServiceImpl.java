@@ -2,9 +2,12 @@ package com.example.ITSS.service.Impl;
 
 import com.example.ITSS.dto.requestDto.UserRequestDto;
 import com.example.ITSS.dto.responseDto.UserResponseDto;
+import com.example.ITSS.models.Class;
+import com.example.ITSS.models.ProjectClassMember;
 import com.example.ITSS.models.enums.UserRole;
 import com.example.ITSS.exception.NotFoundException;
 import com.example.ITSS.models.User;
+import com.example.ITSS.repositories.ClassRepository;
 import com.example.ITSS.repositories.ProjectClassMemberRepository;
 import com.example.ITSS.repositories.UserRepository;
 import com.example.ITSS.service.UserService;
@@ -25,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ClassRepository classRepository;
 
     @Override
     public List<UserResponseDto> getAllUser() {
@@ -63,14 +69,34 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User already exists");
         }
         //check user ton tai
+        String password = userRequestDto.getPassword();
+        String confirmPassword = userRequestDto.getConfirmPassword();
+        if (!password.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Password and confirm password do not match");
+        }
         User user = modelMapper.map(userRequestDto, User.class);
         UserRole role = UserRole.valueOf(userRequestDto.getRole());
+        user.setRole(role);
         user.setCreated_at(LocalDate.now());
         User saveUser = userRepository.save(user);
         UserResponseDto userResponseDto = modelMapper.map(saveUser, UserResponseDto.class);
         userResponseDto.setRole(saveUser.getRole().name());
-        userResponseDto.setCreated_at(saveUser.getCreated_at().toString());
         return userResponseDto;
+    }
+
+    @Override
+    public List<UserResponseDto> getUsersByClassId(Long classId) {
+        Class aClass = classRepository.findById(classId).orElseThrow(
+                () -> new NotFoundException("Class not found")
+        );
+        List<ProjectClassMember> projectClassMembers = projectClassMemberRepository.findByClassroomId(classId);
+        List<UserResponseDto> userResponseDtos = projectClassMembers.stream().map(projectClassMember -> {
+            User user = projectClassMember.getUser();
+            UserResponseDto userResponseDto = modelMapper.map(user, UserResponseDto.class);
+            userResponseDto.setRole(user.getRole().name());
+            return userResponseDto;
+        }).toList();
+        return userResponseDtos;
     }
 
 }
