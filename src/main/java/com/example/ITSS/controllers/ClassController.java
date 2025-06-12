@@ -1,13 +1,17 @@
 package com.example.ITSS.controllers;
 
+import com.example.ITSS.config.OurUserDetailService;
+import com.example.ITSS.config.OurUserInfoDetail;
 import com.example.ITSS.dto.ApiResponse;
 import com.example.ITSS.dto.requestDto.ClassRequestDto;
 import com.example.ITSS.dto.responseDto.ClassResponseDto;
 import com.example.ITSS.service.GithubService;
 import com.example.ITSS.service.ClassService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +28,9 @@ public class ClassController {
     private GithubService githubService;
 
     @PostMapping("/class/addClass")
-    public ResponseEntity<ApiResponse<ClassResponseDto>> addClass(@RequestBody ClassRequestDto classRequestDto) {
+    public ResponseEntity<ApiResponse<ClassResponseDto>> addClass(@Valid @RequestBody ClassRequestDto classRequestDto, Authentication authentication) {
+        OurUserInfoDetail ourUserDetailService = (OurUserInfoDetail) authentication.getPrincipal();
+        classRequestDto.setUserCreatedId(ourUserDetailService.getId());
         ClassResponseDto classResponseDto = classService.addClass(classRequestDto);
         ApiResponse<ClassResponseDto> response = new ApiResponse<>();
         response.setStatus("success");
@@ -79,4 +85,29 @@ public class ClassController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("class/getClassByUser")
+    public ResponseEntity<?> getClassByUser(Authentication authentication) {
+        OurUserInfoDetail ourUserDetailService = (OurUserInfoDetail) authentication.getPrincipal();
+        Long userId = ourUserDetailService.getId();
+        List<ClassResponseDto> classResponseDtoList = classService.getClassesByUserId(userId);
+        ApiResponse<List<ClassResponseDto>> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setMessage("get class successfully");
+        response.setData(classResponseDtoList);
+        response.setMetadata(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("class/joinClass")
+    public ResponseEntity<?> joinClass(@RequestParam("classCode") String classCode, Authentication authentication) {
+        OurUserInfoDetail ourUserDetailService = (OurUserInfoDetail) authentication.getPrincipal();
+        Long userId = ourUserDetailService.getId();
+        String joinClass = classService.joinClass(userId, classCode);
+        ApiResponse<String> response = new ApiResponse<>();
+        response.setStatus("success");
+        response.setMessage("join class successfully");
+        response.setData(joinClass);
+        response.setMetadata(null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
