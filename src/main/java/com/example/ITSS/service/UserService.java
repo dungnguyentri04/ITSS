@@ -15,4 +15,6 @@ public interface UserService {
     public UserResponseDto addUser(UserRequestDto userDto);
 
 //    public List<UserResponseDto> getUserProject(Long projectId);
+
+    public List<UserResponseDto> getUsersByClassId(Long classId);
 }
