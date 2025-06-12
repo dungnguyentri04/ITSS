@@ -20,4 +20,7 @@ public class ClassResponseDto {
 
     private LocalDate createdAt;
 
+    private String codeClass;
+
+    private Long totalMember;
 }

@@ -18,15 +18,21 @@ public class TaskResponseDto {
 
     private Long projectId;
 
+    private String projectTitle;
+
     private String title;
 
     private String description;
 
     private String status;
 
+    private String priority;
+
     private LocalDate deadline;
 
     private LocalDate createdAt;
 
     private LocalDate updatedAt;
+
+    private LocalDate completedAt;
 }

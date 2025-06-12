@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class ProjectClassMemberRequestDto {
     private Long projectId;
 
+    private Long classId;
+
     private String username;
 
     private String nameGithub;

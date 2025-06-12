@@ -12,15 +12,17 @@ import java.time.LocalDate;
 public class ProjectClassMemberResponseDto {
     private Long id;
 
-    private String nameGithub;
+    private Long classId;
 
     private Long userId;
+
+    private String nameGithub;
+
+    private String username;
 
     private Long projectId;
 
     private String role;
 
     private LocalDate createdAt;
-
-    private String name;
 }
