@@ -18,5 +18,7 @@ public interface ClassService {
 
     public ClassResponseDto patchClass(Long id, ClassRequestDto classRequestDto);
 
-    public List<ClassResponseDto> getClassByUserId(Long userId);
+    public List<ClassResponseDto> getClassesByUserId(Long userId);
+
+    public String joinClass(Long userId, String codeClass);
 }
